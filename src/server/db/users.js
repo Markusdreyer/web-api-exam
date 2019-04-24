@@ -6,7 +6,6 @@ const users = new Map();
 
 
 function getUser(id) {
-
     return users.get(id);
 }
 
@@ -31,6 +30,11 @@ function verifyUser(id, password) {
     return user.password === password;
 }
 
+
+function sendFriendRequest(fromUser, toUser) {
+    getUser(toUser).friendRequests.push(fromUser)
+}
+
 function createUser(id, password, firstName, surname, dateOfBirth, location) {
 
     if (getUser(id) !== undefined) {
@@ -43,7 +47,9 @@ function createUser(id, password, firstName, surname, dateOfBirth, location) {
         firstName: firstName,
         surname: surname,
         dateOfBirth: dateOfBirth,
-        location: location
+        location: location,
+        friends: [],
+        friendRequests: [],
     };
 
     users.set(id, user);
@@ -55,4 +61,4 @@ function resetAllUsers() {
 }
 
 
-module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers };
+module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers, sendFriendRequest };

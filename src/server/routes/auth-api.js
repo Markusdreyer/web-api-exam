@@ -18,16 +18,19 @@ router.get('/users', function (req, res) {
     res.status(200).send(Users.getAllUsers())
 });
 
-router.get('/menu/:id', (req, res) => {
-    var week = req.params.id
-    res.status(200).send(menu.get.menu(week))
+
+//Fix status codes
+router.post('/friendRequest/:toUser', (req, res) => {
+    var toUser = req.params.toUser
+    var fromUser = req.body.fromUser
+    Users.sendFriendRequest(fromUser, toUser)
+    res.status(201).send()
 })
 
 /*
 */
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-
     res.status(204).send();
 });
 

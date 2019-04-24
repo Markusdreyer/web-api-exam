@@ -137,7 +137,9 @@ class App extends React.Component {
                                 fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo} />} />
                         <Route exact path="/searchResult"
                             render={props => <SearchResult {...props}
-                                users={this.state.users} />} />
+                                user={this.state.user}
+                                users={this.state.users}
+                                fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo} />} />
                         <Route exact path="/"
                             render={props => <Home {...props}
                                 user={this.state.user}
