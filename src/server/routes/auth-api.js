@@ -12,10 +12,10 @@ Move unrelated users activity to seperate file
 
 router.get('/users/:name', function (req, res) {
 
-    // if (!req.user) {
-    //     res.status(401).send();
-    //     return;
-    // }
+    if (!req.user) {
+        res.status(401).send();
+        return;
+    }
 
     res.status(200).send(Users.findUsers(req.params.name))
 });
@@ -84,14 +84,8 @@ router.get('/user', function (req, res) {
         return;
     }
 
-    res.status(200).json({
-        id: req.user.id,
-        firstName: req.user.firstName,
-        surname: req.user.surname,
-        dateOfBirth: req.user.dateOfBirth,
-        location: req.user.location
-    }
-    );
+    res.status(200).send(Users.getUser(req.user.id))
+
 });
 
 

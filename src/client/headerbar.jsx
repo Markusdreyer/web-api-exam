@@ -21,13 +21,11 @@ export class HeaderBar extends React.Component {
 
   doSearch = async () => {
     let url = "/api/users/"
-    console.log(this.state.searchInput)
 
     if (this.state.searchInput != null) {
       url += this.state.searchInput;
     }
 
-    console.log(url)
 
     let response;
 

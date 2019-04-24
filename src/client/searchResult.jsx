@@ -16,7 +16,7 @@ export class SearchResult extends React.Component {
     }
 
     handleFriendRequest = async (fromUser, toUser) => {
-        event.target.innerHTML = "Sent!"
+        event.target.innerHTML = "Cancel request"
         const url = "/api/friendRequest/" + toUser
         let response
 
@@ -38,9 +38,6 @@ export class SearchResult extends React.Component {
         if (response.status !== 201) {
             console.log("Fail")
 
-        } else {
-            const payload = await response.json();
-
         }
 
     }
@@ -50,12 +47,11 @@ export class SearchResult extends React.Component {
         let result = <div></div>
 
         if (!users || !users.length) {
-            let counter = 1
             result = <div>
                 {this.props.users.map(u =>
                     <div>
                         <p key={u.id}>{u.firstName} {u.surname}</p>
-                        <button onClick={() => this.handleFriendRequest(this.props.user, u.id)}>Send friend request</button>
+                        <button onClick={() => this.handleFriendRequest(this.props.user.id, u.id)}>Send friend request</button>
                     </div>
                 )}
             </div>
