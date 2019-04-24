@@ -5,6 +5,22 @@ const Users = require('../db/users');
 
 const router = express.Router();
 
+
+/*
+Move unrelated users activity to seperate file
+*/
+router.get('/users', function (req, res) {
+
+    // if (!req.user) {
+    //     res.status(401).send();
+    //     return;
+    // }
+    res.status(200).send(Users.getAllUsers())
+});
+
+/*
+*/
+
 router.post('/login', passport.authenticate('local'), (req, res) => {
 
     res.status(204).send();

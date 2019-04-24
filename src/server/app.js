@@ -13,7 +13,14 @@ const WsHandler = require('./ws-handler');
 
 
 const app = express();
-Users.createUser("foo", "bar", "foo", "bar", "290696", "Oslo") //Create dummy user
+Users.createUser("catlover", "lovecats", "Andrea", "Arcuri", "03081980", "Italy")
+Users.createUser("lenny1337", "1234", "Leonardo", "da Vinci", "15041519", "Italy")
+Users.createUser("christoph", "bar", "Christopher", "Columbus", "23021451", "Italy")
+Users.createUser("foo", "bar", "Michelangelo", "Buonarroti", "02111475", "Italy")
+Users.createUser("purgatory", "hellishell", "Dante", "Alighieri", "29061265", "Italy")
+Users.createUser("colgate59", "secretpass", "Eugenio", "Barsanti", "27051821", "Italy")
+Users.createUser("practicallygod", "imalive", "Jesus", "Christ", "24120004", "Bethlehem")
+
 
 
 //to handle JSON payloads

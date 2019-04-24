@@ -27,6 +27,8 @@ export class Home extends React.Component {
         return (
             <div>
                 <div>
+                    <h1>Welcome to the house of Medici!</h1>
+
                 </div>
 
                 {loggedIn ? (
@@ -35,7 +37,7 @@ export class Home extends React.Component {
                     </div>
                 ) : (
                         <div>
-                            <p> Log in to view profile</p>
+                            <p>Please log in to view your profile, search for others and keep in touch with old friends</p>
                         </div>
                     )
                 }

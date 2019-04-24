@@ -6,7 +6,7 @@ const { MemoryRouter } = require('react-router-dom');
 const { Home } = require('../../src/client/home');
 
 
-const needToLogInMsg = "Log in to view profile";
+const needToLogInMsg = "Please log in to view your profile, search for others and keep in touch with old friends";
 
 test("Test not logged in", async () => {
 

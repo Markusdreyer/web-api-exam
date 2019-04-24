@@ -10,6 +10,16 @@ function getUser(id) {
     return users.get(id);
 }
 
+function getAllUsers() {
+    let ids = Array.from(users.keys());
+    let userArray = []
+    ids.forEach(id => {
+        userArray.push(getUser(id))
+    });
+
+    return userArray
+}
+
 function verifyUser(id, password) {
 
     const user = getUser(id);
@@ -45,4 +55,4 @@ function resetAllUsers() {
 }
 
 
-module.exports = { getUser, verifyUser, createUser, resetAllUsers };
+module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers };
