@@ -9,6 +9,17 @@ const router = express.Router();
 /*
 Move unrelated users activity to seperate file
 */
+
+router.get('/users/:name', function (req, res) {
+
+    // if (!req.user) {
+    //     res.status(401).send();
+    //     return;
+    // }
+
+    res.status(200).send(Users.findUsers(req.params.name))
+});
+
 router.get('/users', function (req, res) {
 
     if (!req.user) {

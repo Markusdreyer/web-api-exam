@@ -10,12 +10,24 @@ export class HeaderBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      searchInput: null
     };
   }
 
+  onSearchChange = (event) => {
+    this.setState({ searchInput: event.target.value });
+  };
+
   doSearch = async () => {
-    const url = "/api/users";
+    let url = "/api/users/"
+    console.log(this.state.searchInput)
+
+    if (this.state.searchInput != null) {
+      url += this.state.searchInput;
+    }
+
+    console.log(url)
 
     let response;
 
@@ -58,7 +70,7 @@ export class HeaderBar extends React.Component {
   renderLoggedIn(userId) {
     return (
       <div className="msgDiv">
-        <input type="text" className="searchbar" placeholder="Search" />
+        <input type="text" className="searchbar" placeholder="Search" onChange={this.onSearchChange} />
         <button className="searchBtn" onClick={this.doSearch}>
           <Link to="/searchResult">
             Search

@@ -9,6 +9,18 @@ function getUser(id) {
     return users.get(id);
 }
 
+function findUsers(name) {
+    let ids = Array.from(users.keys());
+    let result = []
+    ids.forEach(id => {
+        if (getUser(id).firstName == name || getUser(id).surname == name) {
+            result.push(getUser(id))
+        }
+    });
+    return result
+
+}
+
 function getAllUsers() {
     let ids = Array.from(users.keys());
     let userArray = []
@@ -61,4 +73,4 @@ function resetAllUsers() {
 }
 
 
-module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers, sendFriendRequest };
+module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers, sendFriendRequest, findUsers };
