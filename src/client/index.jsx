@@ -100,6 +100,10 @@ class App extends React.Component {
         this.setState({ user: user });
     };
 
+    getData = (val) => (
+        console.log(val)
+    )
+
 
     notFound() {
         return (
@@ -127,7 +131,7 @@ class App extends React.Component {
             <BrowserRouter>
                 <div>
                     <HeaderBar userId={id}
-                        updateLoggedInUser={this.updateLoggedInUser} />
+                        updateLoggedInUser={this.updateLoggedInUser} sendData={this.getData} />
                     <Switch>
                         <Route exact path="/login"
                             render={props => <Login {...props}

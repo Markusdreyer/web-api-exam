@@ -26,17 +26,13 @@ export class Home extends React.Component {
 
         return (
             <div>
-                <div>
-                    <h1>Welcome to the house of Medici!</h1>
-
-                </div>
-
                 {loggedIn ? (
                     <div>
                         <Profile user={this.props.user} />
                     </div>
                 ) : (
                         <div>
+                            <h1>Welcome to the house of Medici!</h1>
                             <p>Please log in to view your profile, search for others and keep in touch with old friends</p>
                         </div>
                     )

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { async } from "rxjs/internal/scheduler/async";
 
 /*
     Just provide a header component for all pages, where we have a link to the
@@ -8,6 +9,29 @@ import { Link, withRouter } from "react-router-dom";
 export class HeaderBar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      users: []
+    };
+  }
+
+  doSearch = async () => {
+    const url = "/api/users";
+
+    let response;
+
+    try {
+      response = await fetch(url, { method: "get" });
+    } catch (err) {
+      alert("Failed to connect to server: " + err);
+      return;
+    }
+
+    if (response.status !== 200) {
+      alert("Error when connecting to server: status code " + response.status);
+      return;
+    }
+    const payload = await response.json();
+    this.props.sendData(payload)
   }
 
   doLogout = async () => {
@@ -34,11 +58,8 @@ export class HeaderBar extends React.Component {
   renderLoggedIn(userId) {
     return (
       <div className="msgDiv">
-        <h3 className="notLoggedInMsg">
-          Welcome {userId}
-          !!!
-        </h3>
-
+        <input type="text" className="searchbar" placeholder="Search" />
+        <button className="searchBtn" onClick={this.doSearch}></button>
         <div className="btn btnPartHeader" onClick={this.doLogout} id="logoutBtnId">
           Logout
         </div>
@@ -49,7 +70,7 @@ export class HeaderBar extends React.Component {
   renderNotLoggedIn() {
     return (
       <div className="msgDiv">
-        <div className="notLoggedInMsg">You are not logged in</div>
+        <div className="searchbar"></div>
         <div className="btnPartHeader">
           <Link className="btn" to="/login">
             LogIn
