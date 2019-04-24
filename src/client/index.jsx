@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 import { Home } from "./home";
+import SearchResult from "./searchResult"
 import Login from "./login";
 import SignUp from "./signup"
 import HeaderBar from "./headerbar";
@@ -22,7 +23,7 @@ class App extends React.Component {
 
         this.state = {
             user: null,
-            userCount: 1
+            users: []
         };
     }
 
@@ -100,9 +101,11 @@ class App extends React.Component {
         this.setState({ user: user });
     };
 
-    getData = (val) => (
-        console.log(val)
-    )
+    setResult = (users) => {
+        this.setState({
+            users: users
+        });
+    }
 
 
     notFound() {
@@ -110,7 +113,7 @@ class App extends React.Component {
             <div>
                 <h2>NOT FOUND: 404</h2>
                 <p>
-                    ERROR: the page you requested in not available.
+                    ERROR: the page you requested is not available.
                 </p>
             </div>
         );
@@ -118,20 +121,13 @@ class App extends React.Component {
 
 
     render() {
-        /*
-            When we have a switch, to have a component for a page we just use
-            the attribute "component".
-            However, if we need to pass some props to the component, we need
-            to use the attribute "render".
-         */
-
         const id = this.state.user ? this.state.user.id : null;
 
         return (
             <BrowserRouter>
                 <div>
                     <HeaderBar userId={id}
-                        updateLoggedInUser={this.updateLoggedInUser} sendData={this.getData} />
+                        updateLoggedInUser={this.updateLoggedInUser} searchResult={this.setResult} />
                     <Switch>
                         <Route exact path="/login"
                             render={props => <Login {...props}
@@ -139,6 +135,9 @@ class App extends React.Component {
                         <Route exact path="/signup"
                             render={props => <SignUp {...props}
                                 fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo} />} />
+                        <Route exact path="/searchResult"
+                            render={props => <SearchResult {...props}
+                                users={this.state.users} />} />
                         <Route exact path="/"
                             render={props => <Home {...props}
                                 user={this.state.user}

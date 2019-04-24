@@ -11,12 +11,17 @@ Move unrelated users activity to seperate file
 */
 router.get('/users', function (req, res) {
 
-    // if (!req.user) {
-    //     res.status(401).send();
-    //     return;
-    // }
+    if (!req.user) {
+        res.status(401).send();
+        return;
+    }
     res.status(200).send(Users.getAllUsers())
 });
+
+router.get('/menu/:id', (req, res) => {
+    var week = req.params.id
+    res.status(200).send(menu.get.menu(week))
+})
 
 /*
 */

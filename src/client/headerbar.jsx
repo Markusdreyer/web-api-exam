@@ -31,7 +31,7 @@ export class HeaderBar extends React.Component {
       return;
     }
     const payload = await response.json();
-    this.props.sendData(payload)
+    this.props.searchResult(payload)
   }
 
   doLogout = async () => {
@@ -59,7 +59,11 @@ export class HeaderBar extends React.Component {
     return (
       <div className="msgDiv">
         <input type="text" className="searchbar" placeholder="Search" />
-        <button className="searchBtn" onClick={this.doSearch}></button>
+        <button className="searchBtn" onClick={this.doSearch}>
+          <Link to="/searchResult">
+            Search
+        </Link>
+        </button>
         <div className="btn btnPartHeader" onClick={this.doLogout} id="logoutBtnId">
           Logout
         </div>
