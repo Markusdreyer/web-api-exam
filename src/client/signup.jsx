@@ -22,6 +22,23 @@ export class SignUp extends React.Component {
         this.setState({ userId: event.target.value, errorMsg: null });
     };
 
+    onFirstNameChange = (event) => {
+        this.setState({ firstName: event.target.value, errorMsg: null });
+    };
+
+    onSurnameChange = (event) => {
+        this.setState({ surname: event.target.value, errorMsg: null });
+    };
+
+    onDateOfBirthChange = (event) => {
+        this.setState({ dateOfBirth: event.target.value, errorMsg: null });
+    };
+
+    onLocationChange = (event) => {
+        this.setState({ location: event.target.value, errorMsg: null });
+    };
+
+
     onPasswordChange = (event) => {
         this.setState({ password: event.target.value, errorMsg: null });
     };
@@ -32,7 +49,7 @@ export class SignUp extends React.Component {
 
     doSignUp = async () => {
 
-        const { userId, password, confirm } = this.state;
+        const { userId, password, firstName, surname, dateOfBirth, location, confirm } = this.state;
 
         if (confirm !== password) {
             this.setState({ errorMsg: "Passwords do not match" });
@@ -41,7 +58,7 @@ export class SignUp extends React.Component {
 
         const url = "/api/signup";
 
-        const payload = { userId: userId, password: password };
+        const payload = { userId: userId, password: password, firstName: firstName, surname: surname, dateOfBirth: dateOfBirth, location: location };
 
         let response;
 
@@ -81,7 +98,7 @@ export class SignUp extends React.Component {
             error = <div className="errorMsg"><p>{this.state.errorMsg}</p></div>
         }
 
-        let confirmMsg = "Ok";
+        let confirmMsg = "Passwords match";
         if (this.state.confirm !== this.state.password) {
             confirmMsg = "Not matching";
         }
@@ -100,7 +117,7 @@ export class SignUp extends React.Component {
                     <p>First Name:</p>
                     <input type="text"
                         value={this.state.firstName}
-                        onChange={this.onfirstNameChange} //TODO: CREATE FUN
+                        onChange={this.onFirstNameChange} //TODO: CREATE FUN
                         id="firstNameInput"
                     />
                 </div>
