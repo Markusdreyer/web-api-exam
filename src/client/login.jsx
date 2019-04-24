@@ -8,8 +8,8 @@ export class Login extends React.Component {
         super(props);
 
         this.state = {
-            userId: "",
-            password: "",
+            userId: "foo",
+            password: "bar",
             errorMsg: null
         };
     }
@@ -89,7 +89,7 @@ export class Login extends React.Component {
 
                 {error}
 
-                <div className="btn" onClick={this.doLogIn} id="loginBtn">Log In</div>
+                <button className="btn" onClick={this.doLogIn} id="loginBtn">Log In</button>
                 <Link to={"/signup"}>Register</Link>
             </div>);
     }

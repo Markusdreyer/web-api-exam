@@ -66,6 +66,7 @@ class App extends React.Component {
         this.socket.close();
     }
 
+
     fetchAndUpdateUserInfo = async () => {
 
         const url = "/api/user";
@@ -137,7 +138,6 @@ class App extends React.Component {
                         <Route exact path="/"
                             render={props => <Home {...props}
                                 user={this.state.user}
-                                userCount={this.state.userCount}
                                 fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo} />} />
                         <Route component={this.notFound} />
                     </Switch>
