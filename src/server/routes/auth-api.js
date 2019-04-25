@@ -15,6 +15,11 @@ router.post('/acceptRequest/:fromUser', function (req, res) {
     res.status(201).send()
 })
 
+router.post('/declineRequest/:fromUser', function (req, res) {
+    Users.declineFriendRequest(req.params.fromUser, req.user.id)
+    res.status(201).send()
+})
+
 router.get('/users/:name', function (req, res) {
 
     if (!req.user) {

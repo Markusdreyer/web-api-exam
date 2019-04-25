@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 import { Home } from "./home";
+import FriendProfile from "./friendProfile"
 import SearchResult from "./searchResult"
 import Login from "./login";
 import SignUp from "./signup"
@@ -107,6 +108,12 @@ class App extends React.Component {
         });
     }
 
+    setCurrentProfile = (profile) => {
+        this.setState({
+            profile: profile
+        });
+    }
+
 
     notFound() {
         return (
@@ -129,6 +136,8 @@ class App extends React.Component {
                     <HeaderBar userId={id}
                         updateLoggedInUser={this.updateLoggedInUser} searchResult={this.setResult} />
                     <Switch>
+                        <Route exact path="/profile"
+                            render={props => <FriendProfile {...props} />} />
                         <Route exact path="/login"
                             render={props => <Login {...props}
                                 fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo} />} />

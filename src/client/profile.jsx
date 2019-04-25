@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 export class Profile extends React.Component {
     constructor(props) {
         super(props);
@@ -29,8 +27,24 @@ export class Profile extends React.Component {
         }
     }
 
-    handleDeclineFriend = () => {
+    handleDeclineFriend = async (fromUser) => {
+        const url = "/api/declineRequest/" + fromUser
+        let response
 
+        try {
+            response = await fetch(url, {
+                method: "post"
+            });
+        } catch (err) {
+            this.setState({ errorMsg: "Failed to connect to server: " + err });
+            return;
+        }
+
+        if (response.status !== 200) {
+            console.log("Fail")
+        } else {
+
+        }
     }
 
     render() {
@@ -68,3 +82,5 @@ export class Profile extends React.Component {
         );
     }
 }
+
+

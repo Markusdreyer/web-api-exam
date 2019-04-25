@@ -1,55 +1,16 @@
-.quizBtn {
-
+.searchResult {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid black;
+    display: block
 }
 
-
-.quizQuestion {
-  
+.searchProfile:hover {
+    display: inline-block;
+    cursor: pointer;
 }
+
 
 .headerBar {
     border-bottom: 2px solid black;
-}
-
-.msgDiv {
-
-}
-.notLoggedInMsg {
-
-}
-.home {
-
-}
-.btnPartHeader {
-
-}
-
-.index {
-  
-}
-
-
-
-
-.cell-to-insert {
-
-}
-
-.btnPart {
-
-}
-.btn {
-
-}
-
-.btnDeActive {
-
-}
-
-.calendarContainer {
-    background-color: aliceblue;
-}
-
-.menuEditor {
-    border: 1px solid black
 }

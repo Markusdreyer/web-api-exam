@@ -77,6 +77,12 @@ function acceptFriendRequest(fromUser, toUser) {
 
 }
 
+function declineFriendRequest(fromUser, toUser) {
+    let index = getUser(toUser).friendRequests.indexOf(fromUser)
+    if (index !== -1) getUser(toUser).friendRequests.splice(index, 1)
+
+}
+
 function createUser(id, password, firstName, surname, dateOfBirth, location) {
 
     if (getUser(id) !== undefined) {
@@ -103,4 +109,4 @@ function resetAllUsers() {
 }
 
 
-module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers, sendFriendRequest, findUsers, acceptFriendRequest };
+module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers, sendFriendRequest, findUsers, acceptFriendRequest, declineFriendRequest };

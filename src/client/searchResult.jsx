@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 export class SearchResult extends React.Component {
     constructor(props) {
@@ -36,19 +36,41 @@ export class SearchResult extends React.Component {
         }
     }
 
+    renderLoggedIn(userId) {
+        return (
+            <div className="msgDiv">
+                <input type="text" className="searchbar" placeholder="Search" onChange={this.onSearchChange} />
+                <button className="searchBtn" onClick={this.doSearch}>
+                    <Link to="/searchResult">
+                        Search
+                    </Link>
+                </button>
+                <div className="btn btnPartHeader" onClick={this.doLogout} id="logoutBtnId">
+                    Logout
+            </div>
+            </div>
+        );
+    }
+
     render() {
         let result = <div></div>
         result = <div>
-            {this.props.users.map(u =>
-                <div>
-                    <p key={u.id}>{u.firstName} {u.surname}</p>
-                    <button onClick={() => this.handleFriendRequest(u.id)}>Send friend request</button>
+            {this.props.users.map(user =>
+                <div className={"searchResult"}>
+                    <Link to={{ pathname: "/profile", state: { user: user } }}>
+                        <p className="searchProfile" key={user.id}>{user.firstName} {user.surname}</p>
+                    </Link>
+                    <div>
+                        <button onClick={() => this.handleFriendRequest(user.id)}>Send friend request</button>
+                    </div>
                 </div>
+
             )}
         </div>
 
         return (
             <div>
+                <p>Click on name to view profile</p>
                 {result}
             </div>
         );
