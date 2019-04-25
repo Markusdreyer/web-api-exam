@@ -8,9 +8,9 @@ const authApi = require('./routes/auth-api');
 const timelineApi = require('./routes/timeline-api')
 const Users = require('./db/users');
 const Posts = require('./db/posts');
-const WsHandler = require('./ws-handler');
 const app = express();
 const ews = require('express-ws')(app);
+const WebSocket = require('ws');
 
 
 Users.createUser("catlover", "lovecats", "Andrea", "Arcuri", "03081980", "Italy")
@@ -25,8 +25,6 @@ Users.createUser("practicallygod", "imalive", "Jesus", "Christ", "24120004", "Be
 
 //to handle JSON payloads
 app.use(bodyParser.json());
-
-WsHandler.init(app);
 
 
 app.use(session({
@@ -79,6 +77,10 @@ app.post('/api/posts', (req, res) => {
             console.log("Client not ready");
         }
     });
+});
+
+app.ws('/', function (ws, req) {
+    console.log('Established a new WS connection');
 });
 
 

@@ -42,32 +42,7 @@ class App extends React.Component {
      */
     componentDidMount() {
         this.fetchAndUpdateUserInfo();
-
-
-        let protocol = "ws:";
-        if (window.location.protocol.toLowerCase() === "https:") {
-            protocol = "wss:";
-        }
-
-        this.socket = new WebSocket(protocol + "//" + window.location.host);
-
-        this.socket.onmessage = (event => {
-
-            const dto = JSON.parse(event.data);
-
-            if (dto === null || dto === undefined || !dto.userCount) {
-                this.setState({ userCount: "ERROR" });
-                return;
-            }
-
-            this.setState({ userCount: dto.userCount });
-        });
     }
-
-    componentWillUnmount() {
-        this.socket.close();
-    }
-
 
     fetchAndUpdateUserInfo = async () => {
 

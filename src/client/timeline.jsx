@@ -9,6 +9,7 @@ export class Timeline extends React.Component {
     }
 
     componentDidMount() {
+        this.fetchPosts();
         this.socket = new WebSocket("ws://" + window.location.host);
 
         this.socket.onmessage = (event => {
@@ -59,13 +60,7 @@ export class Timeline extends React.Component {
 
 
     fetchPosts = async () => {
-
-        let since = "";
-        if (this.state.posts !== null && this.state.posts.length !== 0) {
-            since = "?since=" + Math.max(...this.state.posts.map(m => m.id));
-        }
-
-        const url = "/api/posts" + since;
+        const url = "/api/posts"
 
         let response;
         let payload;
@@ -83,7 +78,7 @@ export class Timeline extends React.Component {
             this.setState(
                 prev => {
                     if (prev.posts === null) {
-                        return { posts: payload };
+                        return { posts: payload.posts };
                     } else {
                         return { posts: prev.posts.concat(payload) };
                     }
@@ -102,8 +97,7 @@ export class Timeline extends React.Component {
 
     render() {
         let posts = <div></div>;
-
-        if (this.state.posts !== null) {
+        if (this.state.posts !== null && this.state.posts.length !== 0) {
             posts = <div>
                 {this.state.posts.map(m =>
                     <p key={"msg_key_" + m.id}> {m.author + ": " + m.text}</p>

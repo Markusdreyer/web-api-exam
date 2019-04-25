@@ -13,7 +13,7 @@ router.get('/posts', (req, res) => {
 
     const since = req.query["since"];
 
-    const data = Posts;
+    const data = Posts.getPosts;
 
     if (since !== undefined && since !== null) {
         res.json(data.filter(m => m.id > since));

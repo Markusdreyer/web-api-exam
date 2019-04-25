@@ -4,4 +4,8 @@ function updatePosts(post) {
     posts.push(post)
 }
 
-module.exports = { posts, updatePosts };
+function getPosts() {
+    return posts
+}
+
+module.exports = { posts, updatePosts, getPosts };
