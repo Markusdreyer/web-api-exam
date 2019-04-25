@@ -137,6 +137,7 @@ class App extends React.Component {
                         updateLoggedInUser={this.updateLoggedInUser} searchResult={this.setResult} />
                     <Switch>
                         <Route exact path="/profile"
+                            user={this.state.user}
                             render={props => <FriendProfile {...props} />} />
                         <Route exact path="/login"
                             render={props => <Login {...props}

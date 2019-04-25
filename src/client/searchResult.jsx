@@ -57,14 +57,13 @@ export class SearchResult extends React.Component {
         result = <div>
             {this.props.users.map(user =>
                 <div className={"searchResult"}>
-                    <Link to={{ pathname: "/profile", state: { user: user } }}>
+                    <Link to={{ pathname: "/profile", state: { profile: user, user: this.props.user } }}>
                         <p className="searchProfile" key={user.id}>{user.firstName} {user.surname}</p>
                     </Link>
                     <div>
                         <button onClick={() => this.handleFriendRequest(user.id)}>Send friend request</button>
                     </div>
                 </div>
-
             )}
         </div>
 
