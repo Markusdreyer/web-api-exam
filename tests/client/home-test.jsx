@@ -19,7 +19,7 @@ test("Test not logged in", async () => {
 
 test("Test logged in", async () => {
 
-    const user = { id: "Foo" };
+    const user = { id: "Foo", friendRequests: [], friends: [] };
     const fetchAndUpdateUserInfo = () => new Promise(resolve => resolve());
 
     const driver = mount(
