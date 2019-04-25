@@ -27,7 +27,7 @@ export class Home extends React.Component {
             <div>
                 {loggedIn ? (
                     <div>
-                        <Profile user={this.props.user} users={this.props.users} />
+                        <Profile fetchAndUpdateUserInfo={this.props.fetchAndUpdateUserInfo} user={this.props.user} users={this.props.users} />
                         <Timeline user={this.props.user} />
                     </div>
                 ) : (

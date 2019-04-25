@@ -13,13 +13,13 @@ const ews = require('express-ws')(app);
 const WebSocket = require('ws');
 
 
-Users.createUser("catlover", "lovecats", "Andrea", "Arcuri", "03081980", "Italy")
-Users.createUser("lenny1337", "1234", "Leonardo", "da Vinci", "15041519", "Italy")
-Users.createUser("christoph", "bar", "Christopher", "Columbus", "23021451", "Italy")
-Users.createUser("foo", "bar", "Michelangelo", "Buonarroti", "02111475", "Italy")
-Users.createUser("purgatory", "hellishell", "Dante", "Alighieri", "29061265", "Italy")
-Users.createUser("colgate59", "secretpass", "Eugenio", "Barsanti", "27051821", "Italy")
-Users.createUser("practicallygod", "imalive", "Jesus", "Christ", "24120004", "Bethlehem")
+Users.createUser("catlover", "lovecats", "Andrea", "Arcuri", "03081980", "Italy", ["foo"], [])
+Users.createUser("lenny1337", "1234", "Leonardo", "da Vinci", "15041519", "Italy", [], [])
+Users.createUser("christoph", "bar", "Christopher", "Columbus", "23021451", "Italy", [], [])
+Users.createUser("foo", "bar", "Michelangelo", "Buonarroti", "02111475", "Italy", ["catlover"], ["lenny1337"])
+Users.createUser("purgatory", "hellishell", "Dante", "Alighieri", "29061265", "Italy", [], [])
+Users.createUser("colgate59", "secretpass", "Eugenio", "Barsanti", "27051821", "Italy", [], [])
+Users.createUser("practicallygod", "imalive", "Jesus", "Christ", "24120004", "Bethlehem", [], [])
 
 
 
@@ -46,7 +46,6 @@ app.get('/api/posts/:user', (req, res) => {
 });
 
 app.post('/api/posts', (req, res) => {
-
     const dto = req.body;
 
     const id = counter++;
@@ -62,9 +61,7 @@ app.post('/api/posts', (req, res) => {
     console.log("Going to broadcast post to " + nclients + " clients");
 
     ews.getWss().clients.forEach((client) => {
-        let user = Users.getUser(client.author)
-        console.log(client)
-        if (client.readyState === WebSocket.OPEN && user.id == post.author) {
+        if (client.readyState === WebSocket.OPEN) {
             const json = JSON.stringify(post);
             console.log("Broadcasting to client: " + JSON.stringify(post));
             client.send(json);
@@ -72,6 +69,7 @@ app.post('/api/posts', (req, res) => {
             console.log("Client not ready");
         }
     });
+
 });
 
 app.ws('/', function (ws, req) {

@@ -11,7 +11,6 @@ export class Timeline extends React.Component {
     componentDidMount() {
         this.fetchPosts(this.props.user.id);
         this.socket = new WebSocket("ws://" + window.location.host);
-
         this.socket.onmessage = (event => {
 
             const post = JSON.parse(event.data);

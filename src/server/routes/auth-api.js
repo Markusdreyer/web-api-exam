@@ -10,14 +10,14 @@ const router = express.Router();
 Move unrelated users activity to seperate file
 */
 
-router.post('/acceptRequest/:fromUser', function (req, res) {
+router.put('/accept/:fromUser', function (req, res) {
     Users.acceptFriendRequest(req.params.fromUser, req.user.id)
-    res.status(201).send()
+    res.status(200).send()
 })
 
-router.post('/declineRequest/:fromUser', function (req, res) {
+router.delete('/decline/:fromUser', function (req, res) {
     Users.declineFriendRequest(req.params.fromUser, req.user.id)
-    res.status(201).send()
+    res.status(200).send()
 })
 
 router.get('/users/:name', function (req, res) {

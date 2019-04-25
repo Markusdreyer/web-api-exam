@@ -10,12 +10,11 @@ function getPosts() {
 
 function getPosts(user) {
     let availablePosts = []
-    console.log(user.friends)
     posts.forEach(post => {
         if (user.id == post.author) {
             availablePosts.push(post)
         }
-        if (user.friends.length != 0 && user.inculdes(post.author)) {
+        if (user.friends.length != 0 && user.friends.includes(post.author)) {
             availablePosts.push(post)
         }
     });

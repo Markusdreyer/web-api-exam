@@ -74,7 +74,6 @@ function acceptFriendRequest(fromUser, toUser) {
 
     let index = getUser(toUser).friendRequests.indexOf(fromUser)
     if (index !== -1) getUser(toUser).friendRequests.splice(index, 1)
-
 }
 
 function declineFriendRequest(fromUser, toUser) {
@@ -83,7 +82,7 @@ function declineFriendRequest(fromUser, toUser) {
 
 }
 
-function createUser(id, password, firstName, surname, dateOfBirth, location) {
+function createUser(id, password, firstName, surname, dateOfBirth, location, friends, friendRequests) {
 
     if (getUser(id) !== undefined) {
         return false;
@@ -96,8 +95,8 @@ function createUser(id, password, firstName, surname, dateOfBirth, location) {
         surname: surname,
         dateOfBirth: dateOfBirth,
         location: location,
-        friends: [],
-        friendRequests: [],
+        friends: friends,
+        friendRequests: friendRequests,
     };
 
     users.set(id, user);

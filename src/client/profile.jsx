@@ -4,36 +4,17 @@ export class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: this.props.user
         };
     }
 
     handleAcceptFriend = async (fromUser) => {
-        const url = "/api/acceptRequest/" + fromUser
+        const url = "/api/accept/" + fromUser
         let response
 
         try {
             response = await fetch(url, {
-                method: "post"
-            });
-        } catch (err) {
-            this.setState({ errorMsg: "Failed to connect to server: " + err });
-            return;
-        }
-
-        if (response.status !== 201) {
-            console.log("Fail")
-        } else {
-
-        }
-    }
-
-    handleDeclineFriend = async (fromUser) => {
-        const url = "/api/declineRequest/" + fromUser
-        let response
-
-        try {
-            response = await fetch(url, {
-                method: "post"
+                method: "put"
             });
         } catch (err) {
             this.setState({ errorMsg: "Failed to connect to server: " + err });
@@ -43,12 +24,38 @@ export class Profile extends React.Component {
         if (response.status !== 200) {
             console.log("Fail")
         } else {
-
+            await this.props.fetchAndUpdateUserInfo();
+            this.setState({
+                user: this.props.user
+            })
         }
     }
 
-    render() {
+    handleDeclineFriend = async (fromUser) => {
+        const url = "/api/decline/" + fromUser
+        let response
 
+        try {
+            response = await fetch(url, {
+                method: "delete"
+            });
+        } catch (err) {
+            this.setState({ errorMsg: "Failed to connect to server: " + err });
+            return;
+        }
+
+        if (response.status !== 200) {
+            console.log("Fail")
+        }
+        await this.props.fetchAndUpdateUserInfo();
+        this.setState({
+            user: this.props.user
+        })
+
+    }
+
+
+    render() {
         let profile = <div>
             <h2>{this.props.user.firstName} {this.props.user.surname}</h2>
             <h3>{this.props.user.dateOfBirth} {this.props.user.location}</h3>
@@ -64,11 +71,10 @@ export class Profile extends React.Component {
         </div>
 
         let friends = <div className="friendsDiv">
-            {this.props.user.friends.map(friend =>
+            {this.state.user.friends.map(friend =>
                 <div key={friend}>
                     <p>{friend}</p>
-                </div>
-            )}
+                </div>)}
         </div>
         return (
             <div className="profileDiv">
