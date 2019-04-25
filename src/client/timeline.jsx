@@ -4,6 +4,7 @@ export class Timeline extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            posts: null
         };
     }
 
@@ -12,14 +13,14 @@ export class Timeline extends React.Component {
 
         this.socket.onmessage = (event => {
 
-            const msg = JSON.parse(event.data);
+            const post = JSON.parse(event.data);
 
             this.setState(
                 prev => {
                     if (prev.posts === null) {
-                        return { posts: [msg] };
+                        return { posts: [post] };
                     } else {
-                        return { posts: [...prev.posts, msg] };
+                        return { posts: [...prev.posts, post] };
                     }
                 }
             );
@@ -94,8 +95,21 @@ export class Timeline extends React.Component {
         }
     };
 
+    onTextChange = (event) => {
+        this.setState({ text: event.target.value });
+    };
+
 
     render() {
+        let posts = <div></div>;
+
+        if (this.state.posts !== null) {
+            posts = <div>
+                {this.state.posts.map(m =>
+                    <p key={"msg_key_" + m.id}> {m.author + ": " + m.text}</p>
+                )}
+            </div>;
+        }
         return (
             <div>
                 <div className="postEditor">
@@ -105,7 +119,9 @@ export class Timeline extends React.Component {
                         onChange={this.onTextChange}
                         id="msgInputId"
                     />
+                    <button onClick={this.createPost}>Post</button>
                 </div>
+                {posts}
             </div>
         );
     }

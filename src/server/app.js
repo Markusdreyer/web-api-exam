@@ -4,15 +4,15 @@ const passport = require('passport');
 const session = require("express-session");
 const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
-
 const authApi = require('./routes/auth-api');
 const timelineApi = require('./routes/timeline-api')
 const Users = require('./db/users');
-
+const Posts = require('./db/posts');
 const WsHandler = require('./ws-handler');
-
-
 const app = express();
+const ews = require('express-ws')(app);
+
+
 Users.createUser("catlover", "lovecats", "Andrea", "Arcuri", "03081980", "Italy")
 Users.createUser("lenny1337", "1234", "Leonardo", "da Vinci", "15041519", "Italy")
 Users.createUser("christoph", "bar", "Christopher", "Columbus", "23021451", "Italy")
@@ -38,6 +38,48 @@ app.use(session({
 
 //needed to server static files, like HTML, CSS and JS.
 app.use(express.static('public'));
+
+let counter = 0;
+
+app.get('/api/posts', (req, res) => {
+
+    const since = req.query["since"];
+
+    const data = Posts;
+
+    if (since !== undefined && since !== null) {
+        res.json(data.filter(m => m.id > since));
+    } else {
+        res.json(data);
+    }
+});
+
+app.post('/api/posts', (req, res) => {
+
+    const dto = req.body;
+
+    const id = counter++;
+
+    const post = { id: id, author: dto.author, text: dto.text };
+
+    Posts.updatePosts(post);
+
+    res.status(201); //created
+    res.send();
+
+    const nclients = ews.getWss().clients.size;
+    console.log("Going to broadcast post to " + nclients + " clients");
+
+    ews.getWss().clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            const json = JSON.stringify(post);
+            console.log("Broadcasting to client: " + JSON.stringify(post));
+            client.send(json);
+        } else {
+            console.log("Client not ready");
+        }
+    });
+});
 
 
 passport.use(new LocalStrategy(
@@ -79,7 +121,7 @@ app.use(passport.session());
 
 //--- Routes -----------
 app.use('/api', authApi);
-app.use('/api', timelineApi)
+//app.use('/api', timelineApi)
 
 //handling 404
 app.use((req, res, next) => {
