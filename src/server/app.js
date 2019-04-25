@@ -39,17 +39,10 @@ app.use(express.static('public'));
 
 let counter = 0;
 
-app.get('/api/posts', (req, res) => {
+app.get('/api/posts/:user', (req, res) => {
+    const data = Posts.getPosts(Users.getUser(req.params.user));
+    res.json(data);
 
-    const since = req.query["since"];
-
-    const data = Posts;
-
-    if (since !== undefined && since !== null) {
-        res.json(data.filter(m => m.id > since));
-    } else {
-        res.json(data);
-    }
 });
 
 app.post('/api/posts', (req, res) => {
@@ -69,7 +62,9 @@ app.post('/api/posts', (req, res) => {
     console.log("Going to broadcast post to " + nclients + " clients");
 
     ews.getWss().clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
+        let user = Users.getUser(client.author)
+        console.log(client)
+        if (client.readyState === WebSocket.OPEN && user.id == post.author) {
             const json = JSON.stringify(post);
             console.log("Broadcasting to client: " + JSON.stringify(post));
             client.send(json);

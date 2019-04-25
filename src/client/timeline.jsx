@@ -9,7 +9,7 @@ export class Timeline extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchPosts();
+        this.fetchPosts(this.props.user.id);
         this.socket = new WebSocket("ws://" + window.location.host);
 
         this.socket.onmessage = (event => {
@@ -59,8 +59,8 @@ export class Timeline extends React.Component {
     };
 
 
-    fetchPosts = async () => {
-        const url = "/api/posts"
+    fetchPosts = async (user) => {
+        const url = "/api/posts/" + user
 
         let response;
         let payload;
@@ -69,7 +69,7 @@ export class Timeline extends React.Component {
             response = await fetch(url);
             payload = await response.json();
         } catch (err) {
-            alert("Failed to connect to server: " + err);
+            alert("Failed to conngeect to server: " + err);
             return;
         }
 
@@ -78,7 +78,7 @@ export class Timeline extends React.Component {
             this.setState(
                 prev => {
                     if (prev.posts === null) {
-                        return { posts: payload.posts };
+                        return { posts: payload };
                     } else {
                         return { posts: prev.posts.concat(payload) };
                     }
