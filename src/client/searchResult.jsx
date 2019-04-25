@@ -15,20 +15,14 @@ export class SearchResult extends React.Component {
         }
     }
 
-    handleFriendRequest = async (fromUser, toUser) => {
-        event.target.innerHTML = "Cancel request"
+    handleFriendRequest = async (toUser) => {
+        event.target.innerHTML = "Cancel request" //TODO: Revisit
         const url = "/api/friendRequest/" + toUser
         let response
 
-        const payload = { fromUser: fromUser };
-
         try {
             response = await fetch(url, {
-                method: "post",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                method: "post"
             });
         } catch (err) {
             this.setState({ errorMsg: "Failed to connect to server: " + err });
@@ -37,25 +31,22 @@ export class SearchResult extends React.Component {
 
         if (response.status !== 201) {
             console.log("Fail")
+        } else {
 
         }
-
     }
 
     render() {
-        const users = this.props.user;
         let result = <div></div>
+        result = <div>
+            {this.props.users.map(u =>
+                <div>
+                    <p key={u.id}>{u.firstName} {u.surname}</p>
+                    <button onClick={() => this.handleFriendRequest(u.id)}>Send friend request</button>
+                </div>
+            )}
+        </div>
 
-        if (!users || !users.length) {
-            result = <div>
-                {this.props.users.map(u =>
-                    <div>
-                        <p key={u.id}>{u.firstName} {u.surname}</p>
-                        <button onClick={() => this.handleFriendRequest(this.props.user.id, u.id)}>Send friend request</button>
-                    </div>
-                )}
-            </div>
-        }
         return (
             <div>
                 {result}

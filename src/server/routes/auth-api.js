@@ -10,6 +10,11 @@ const router = express.Router();
 Move unrelated users activity to seperate file
 */
 
+router.post('/acceptRequest/:fromUser', function (req, res) {
+    Users.acceptFriendRequest(req.params.fromUser, req.user.id)
+    res.status(201).send()
+})
+
 router.get('/users/:name', function (req, res) {
 
     if (!req.user) {
@@ -32,9 +37,7 @@ router.get('/users', function (req, res) {
 
 //Fix status codes
 router.post('/friendRequest/:toUser', (req, res) => {
-    var toUser = req.params.toUser
-    var fromUser = req.body.fromUser
-    Users.sendFriendRequest(fromUser, toUser)
+    Users.sendFriendRequest(req.params.toUser, req.user.id)
     res.status(201).send()
 })
 
@@ -84,8 +87,16 @@ router.get('/user', function (req, res) {
         return;
     }
 
-    res.status(200).send(Users.getUser(req.user.id))
-
+    res.status(200).json({
+        id: req.user.id,
+        firstName: req.user.firstName,
+        surname: req.user.surname,
+        dateOfBirth: req.user.dateOfBirth,
+        location: req.user.location,
+        friends: req.user.friends,
+        friendRequests: req.user.friendRequests,
+    }
+    );
 });
 
 

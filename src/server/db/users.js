@@ -14,7 +14,17 @@ function findUsers(name) {
     let result = []
     ids.forEach(id => {
         if (getUser(id).firstName == name || getUser(id).surname == name) {
-            result.push(getUser(id))
+            let user = getUser(id)
+            let filteredUser = {
+                id: user.id,
+                firstName: user.firstName,
+                surname: user.surname,
+                dateOfBirth: user.dateOfBirth,
+                location: user.location,
+                friends: user.friends,
+                friendRequests: user.friendRequests,
+            };
+            result.push(filteredUser)
         }
     });
     return result
@@ -25,7 +35,17 @@ function getAllUsers() {
     let ids = Array.from(users.keys());
     let userArray = []
     ids.forEach(id => {
-        userArray.push(getUser(id))
+        let user = getUser(id)
+        let filteredUser = {
+            id: user.id,
+            firstName: user.firstName,
+            surname: user.surname,
+            dateOfBirth: user.dateOfBirth,
+            location: user.location,
+            friends: user.friends,
+            friendRequests: user.friendRequests,
+        };
+        userArray.push(filteredUser)
     });
 
     return userArray
@@ -43,8 +63,18 @@ function verifyUser(id, password) {
 }
 
 
-function sendFriendRequest(fromUser, toUser) {
+function sendFriendRequest(toUser, fromUser) {
     getUser(toUser).friendRequests.push(fromUser)
+}
+
+
+function acceptFriendRequest(fromUser, toUser) {
+    getUser(fromUser).friends.push(toUser)
+    getUser(toUser).friends.push(fromUser)
+
+    let index = getUser(toUser).friendRequests.indexOf(fromUser)
+    if (index !== -1) getUser(toUser).friendRequests.splice(index, 1)
+
 }
 
 function createUser(id, password, firstName, surname, dateOfBirth, location) {
@@ -73,4 +103,4 @@ function resetAllUsers() {
 }
 
 
-module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers, sendFriendRequest, findUsers };
+module.exports = { getUser, verifyUser, createUser, resetAllUsers, getAllUsers, sendFriendRequest, findUsers, acceptFriendRequest };
