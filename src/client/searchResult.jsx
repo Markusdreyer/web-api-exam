@@ -56,9 +56,9 @@ export class SearchResult extends React.Component {
         let result = <div></div>
         result = <div>
             {this.props.users.map(user =>
-                <div className={"searchResult"}>
+                <div key={user.id} className={"searchResult"}>
                     <Link to={{ pathname: "/profile", state: { profile: user, user: this.props.user } }}>
-                        <p className="searchProfile" key={user.id}>{user.firstName} {user.surname}</p>
+                        <p className="searchProfile">{user.firstName} {user.surname}</p>
                     </Link>
                     <div>
                         <button onClick={() => this.handleFriendRequest(user.id)}>Send friend request</button>

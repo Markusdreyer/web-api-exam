@@ -20,7 +20,7 @@ export class Profile extends React.Component {
             return;
         }
 
-        if (response.status !== 200) {
+        if (response.status !== 201) {
             console.log("Fail")
         } else {
 
@@ -49,14 +49,13 @@ export class Profile extends React.Component {
 
     render() {
 
-        let profile = <div></div>
-        profile = <div>
+        let profile = <div>
             <h2>{this.props.user.firstName} {this.props.user.surname}</h2>
             <h3>{this.props.user.dateOfBirth} {this.props.user.location}</h3>
         </div>
-        let friendRequests = <div>
+        let friendRequests = <div className="friendRequestsDiv">
             {this.props.user.friendRequests.map(fr =>
-                <div>
+                <div key={fr}>
                     <p>{fr}</p>
                     <button onClick={() => this.handleAcceptFriend(fr)}>Accept</button>
                     <button onClick={() => this.handleDeclineFriend(fr)}>Decline</button>
@@ -64,15 +63,15 @@ export class Profile extends React.Component {
             )}
         </div>
 
-        let friends = <div>
+        let friends = <div className="friendsDiv">
             {this.props.user.friends.map(friend =>
-                <div>
+                <div key={friend}>
                     <p>{friend}</p>
                 </div>
             )}
         </div>
         return (
-            <div>
+            <div className="profileDiv">
                 {profile}
                 <h4>Friend requests:</h4>
                 {friendRequests}

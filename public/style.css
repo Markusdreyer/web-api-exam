@@ -10,6 +10,23 @@
     cursor: pointer;
 }
 
+.profileDiv {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.friendRequestsDiv {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.friendsDiv {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+}
 
 .headerBar {
     border-bottom: 2px solid black;

@@ -21,7 +21,7 @@ export class FriendProfile extends React.Component {
 
         let friends = <div>
             {props.profile.friends.map(friend =>
-                <div>
+                <div key={friend}>
                     <p>{friend}</p>
                 </div>
             )}

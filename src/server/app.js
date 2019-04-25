@@ -6,7 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 
 const authApi = require('./routes/auth-api');
-const menuApi = require('./routes/menu-api.js');
+const timelineApi = require('./routes/timeline-api')
 const Users = require('./db/users');
 
 const WsHandler = require('./ws-handler');
@@ -79,7 +79,7 @@ app.use(passport.session());
 
 //--- Routes -----------
 app.use('/api', authApi);
-app.use('/api', menuApi);
+app.use('/api', timelineApi)
 
 //handling 404
 app.use((req, res, next) => {

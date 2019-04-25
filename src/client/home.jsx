@@ -1,6 +1,7 @@
 import React from "react";
 import { Profile } from "./profile"
 import { Link } from "react-router-dom";
+import { Timeline } from "./timeline";
 
 
 export class Home extends React.Component {
@@ -27,6 +28,7 @@ export class Home extends React.Component {
                 {loggedIn ? (
                     <div>
                         <Profile user={this.props.user} users={this.props.users} />
+                        <Timeline user={this.props.user} />
                     </div>
                 ) : (
                         <div>
