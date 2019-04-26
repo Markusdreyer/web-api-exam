@@ -1,7 +1,18 @@
 # Student notes
 
 ## How to run
-The program has been pre-populated with data for ease of use, and is also set up with some cases to get started.
+The program has been pre-populated with data for ease of use, and a user is also set up with some extra cases to get started.
+
+Following are all the users available to log into on startup:
+```
+1: username: "catlover", password: "lovecats"
+2: username: "lenny1337", password: "1234"
+3: username: "christoph", password: "bar"
+4: username: "foo", password: "bar"
+5: username: "purgatory", password: "hellishell"
+6: username: "colgate59", password: "secretpass"
+7: username: "practicallygod", password: "imalive"
+```
 
 ## Checklist
 ### Requirements for E

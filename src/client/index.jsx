@@ -48,6 +48,7 @@ class App extends React.Component {
         }
 
         if (response.status !== 200) {
+        } else {
             const payload = await response.json();
             this.updateLoggedInUser(payload);
         }
