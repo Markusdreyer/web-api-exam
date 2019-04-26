@@ -21,13 +21,15 @@ Following are all the users available to log into on startup, however, the  ```f
 
 ### Functionality
 - [x] Websockets timeline rendering posts from your friends in chronological order.
-- [x] List over friends (only visible to friends)
-- [x] List over friend requests (only visible to the user logged in)   
+- [x] List of friends
+- [x] List of friend requests (only visible to the user logged in)   
+- [X] Send friend requests 
+- [x] Accept or decline friend requests
 - [x] Login page
 - [x] Signup page
 - [x] Search for other users (case sensitive)
 - [X] View other users profile (limited view if not friends)
-- [x] Accept or decline friend requests
+
 
 *Note: leave the search field blank to list all users*
 

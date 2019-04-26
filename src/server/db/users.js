@@ -1,4 +1,5 @@
 //This file contains code from the lecturer and has been altered to fit the needs of this assignment
+//https://github.com/arcuri82/web_development_and_api_design/blob/master/exercise-solutions/quiz-game/part-10/src/server/db/users.js
 
 const users = new Map();
 
