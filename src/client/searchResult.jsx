@@ -16,7 +16,7 @@ export class SearchResult extends React.Component {
     }
 
     handleFriendRequest = async (toUser) => {
-        event.target.innerHTML = "Cancel request" //TODO: Revisit
+        event.target.innerHTML = "Cancel request"
         const url = "/api/request/" + toUser
         let response
         let payload = { id: this.props.user.id }
@@ -41,22 +41,6 @@ export class SearchResult extends React.Component {
         }
     }
 
-    renderLoggedIn(userId) {
-        return (
-            <div className="msgDiv">
-                <input type="text" className="searchbar" placeholder="Search" onChange={this.onSearchChange} />
-                <button className="searchBtn" onClick={this.doSearch}>
-                    <Link to="/searchResult">
-                        Search
-                    </Link>
-                </button>
-                <div className="btn btnPartHeader" onClick={this.doLogout} id="logoutBtnId">
-                    Logout
-            </div>
-            </div>
-        );
-    }
-
     render() {
         let result = <div></div>
         result = <div>
@@ -66,7 +50,7 @@ export class SearchResult extends React.Component {
                         <p className="searchProfile">{user.firstName} {user.surname}</p>
                     </Link>
                     <div>
-                        <button onClick={() => this.handleFriendRequest(user.id)}>Send friend request</button>
+                        <button id="friendRequestBtn" onClick={() => this.handleFriendRequest(user.id)}>Send friend request</button>
                     </div>
                 </div>
             )}

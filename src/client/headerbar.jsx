@@ -69,7 +69,7 @@ export class HeaderBar extends React.Component {
     return (
       <div className="msgDiv">
         <input type="text" className="searchbar" placeholder="Search" onChange={this.onSearchChange} />
-        <button className="searchBtn" onClick={this.doSearch}>
+        <button id="searchBtn" onClick={this.doSearch}>
           <Link to="/searchResult">
             Search
         </Link>

@@ -10,6 +10,7 @@ const notLoggedInMsg = "LogIn";
 const loggedInMsg = "Logout"
 
 
+
 test("Test not logged in", async () => {
 
     const userId = null;
@@ -43,20 +44,16 @@ test("Test logged in", async () => {
     expect(html.includes(searchbar)).toEqual(true);
 });
 
-
-//TODO: Revisit
 test("Test do logout", async () => {
 
     overrideFetch(app);
 
-    let userId = "Foo";
-    const updateLoggedInUser = (id) => { userId = id };
-    let page = null;
-    const history = { push: (h) => { page = h } };
+    let userId = "foo";
+
 
     const driver = mount(
         <MemoryRouter initialEntries={["/home"]}>
-            <HeaderBar userId={userId} updateLoggedInUser={updateLoggedInUser} history={history} />
+            <HeaderBar userId={userId} />
         </MemoryRouter>
     );
 
@@ -64,7 +61,11 @@ test("Test do logout", async () => {
     //expect(html.includes(userId)).toEqual(true);
 
     const logoutBtn = driver.find("#logoutBtnId").at(0);
+    const searchBtn = driver.find("#searchBtn").at(0);
+    searchBtn.simulate('click');
     logoutBtn.simulate('click');
+
+    searchBtn
 
     const changed = await asyncCheckCondition(() => {
         driver.update();
@@ -73,6 +74,4 @@ test("Test do logout", async () => {
     }, 2000, 200);
     expect(changed).toEqual(true);
 
-    //expect(userId).toEqual(null);
-    //expect(page).toEqual("/");
 });

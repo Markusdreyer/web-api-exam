@@ -27,14 +27,11 @@ export class Profile extends React.Component {
             return;
         }
 
-        if (response.status !== 200) {
-            console.log("Fail")
-        } else {
-            await this.props.fetchAndUpdateUserInfo();
-            this.setState({
-                user: this.props.user
-            })
-        }
+        await this.props.fetchAndUpdateUserInfo();
+        this.setState({
+            user: this.props.user
+        })
+
     }
 
     handleDeclineFriend = async (fromUser) => {
@@ -55,9 +52,6 @@ export class Profile extends React.Component {
             return;
         }
 
-        if (response.status !== 200) {
-            console.log("Fail")
-        }
         await this.props.fetchAndUpdateUserInfo();
         this.setState({
             user: this.props.user
