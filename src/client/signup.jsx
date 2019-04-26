@@ -117,7 +117,7 @@ export class SignUp extends React.Component {
                     <p>First Name:</p>
                     <input type="text"
                         value={this.state.firstName}
-                        onChange={this.onFirstNameChange} //TODO: CREATE FUN
+                        onChange={this.onFirstNameChange}
                         id="firstNameInput"
                     />
                 </div>
@@ -125,7 +125,7 @@ export class SignUp extends React.Component {
                     <p>Surname:</p>
                     <input type="text"
                         value={this.state.surname}
-                        onChange={this.onSurnameChange} //TODO: CREATE FUN
+                        onChange={this.onSurnameChange}
                         id="surnameInput"
                     />
                 </div>
@@ -133,7 +133,7 @@ export class SignUp extends React.Component {
                     <p>Date of Birth:</p>
                     <input type="text"
                         value={this.state.dateOfBirth}
-                        onChange={this.onDateOfBirthChange} //TODO: CREATE FUN
+                        onChange={this.onDateOfBirthChange}
                         id="dateOfBirthInput"
                     />
                 </div>
@@ -141,7 +141,7 @@ export class SignUp extends React.Component {
                     <p>Location:</p>
                     <input type="text"
                         value={this.state.location}
-                        onChange={this.onLocationChange} //TODO: CREATE FUN
+                        onChange={this.onLocationChange}
                         id="locationInput"
                     />
                 </div>

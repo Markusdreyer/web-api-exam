@@ -6,17 +6,13 @@ const Users = require('../db/users');
 const router = express.Router();
 
 
-/*
-Move unrelated users activity to seperate file
-*/
-
 router.put('/accept/:fromUser', function (req, res) {
-    Users.acceptFriendRequest(req.params.fromUser, req.user.id)
+    Users.acceptFriendRequest(req.params.fromUser, req.body.id)
     res.status(200).send()
 })
 
 router.delete('/decline/:fromUser', function (req, res) {
-    Users.declineFriendRequest(req.params.fromUser, req.user.id)
+    Users.declineFriendRequest(req.params.fromUser, req.body.id)
     res.status(200).send()
 })
 
@@ -31,7 +27,6 @@ router.get('/users/:name', function (req, res) {
 });
 
 router.get('/users', function (req, res) {
-
     if (!req.user) {
         res.status(401).send();
         return;
@@ -39,15 +34,10 @@ router.get('/users', function (req, res) {
     res.status(200).send(Users.getAllUsers())
 });
 
-
-//Fix status codes
-router.post('/friendRequest/:toUser', (req, res) => {
-    Users.sendFriendRequest(req.params.toUser, req.user.id)
+router.post('/request/:toUser', (req, res) => {
+    Users.sendFriendRequest(req.params.toUser, req.body.id)
     res.status(201).send()
 })
-
-/*
-*/
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
     res.status(204).send();
@@ -81,10 +71,6 @@ router.post('/logout', function (req, res) {
 });
 
 
-/*
-    Just return the id of the user, if the request is
-    authenticated with a valid session cookie
- */
 router.get('/user', function (req, res) {
 
     if (!req.user) {

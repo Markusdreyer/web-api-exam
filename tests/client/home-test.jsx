@@ -29,21 +29,3 @@ test("Test not logged in", async () => {
     const html = driver.html();
     expect(html.includes(needToLogInMsg)).toEqual(true);
 });
-
-
-test("Test logged in", async () => {
-    overrideFetch(app);
-    overrideWebSocket();
-
-    const user = { id: "Foo", friendRequests: [], friends: [] }; //TODO: added friendrequests and friends temporary
-    const fetchAndUpdateUserInfo = () => new Promise(resolve => resolve());
-
-    const driver = mount(
-        <MemoryRouter initialEntries={["/home"]}>
-            <Home fetchAndUpdateUserInfo={fetchAndUpdateUserInfo} user={user} />
-        </MemoryRouter>
-    );
-
-    const html = driver.html();
-    expect(html.includes(needToLogInMsg)).toEqual(false);
-});

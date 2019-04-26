@@ -17,12 +17,17 @@ export class SearchResult extends React.Component {
 
     handleFriendRequest = async (toUser) => {
         event.target.innerHTML = "Cancel request" //TODO: Revisit
-        const url = "/api/friendRequest/" + toUser
+        const url = "/api/request/" + toUser
         let response
+        let payload = { id: this.props.user.id }
 
         try {
             response = await fetch(url, {
-                method: "post"
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
         } catch (err) {
             this.setState({ errorMsg: "Failed to connect to server: " + err });

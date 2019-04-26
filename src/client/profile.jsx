@@ -1,4 +1,5 @@
 import React from "react";
+import { isNullOrUndefined } from "util";
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -11,10 +12,15 @@ export class Profile extends React.Component {
     handleAcceptFriend = async (fromUser) => {
         const url = "/api/accept/" + fromUser
         let response
+        let payload = { id: this.props.user.id }
 
         try {
             response = await fetch(url, {
-                method: "put"
+                method: "put",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
         } catch (err) {
             this.setState({ errorMsg: "Failed to connect to server: " + err });
@@ -34,10 +40,15 @@ export class Profile extends React.Component {
     handleDeclineFriend = async (fromUser) => {
         const url = "/api/decline/" + fromUser
         let response
+        let payload = { id: this.props.user.id }
 
         try {
             response = await fetch(url, {
-                method: "delete"
+                method: "delete",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
         } catch (err) {
             this.setState({ errorMsg: "Failed to connect to server: " + err });
@@ -64,8 +75,8 @@ export class Profile extends React.Component {
             {this.props.user.friendRequests.map(fr =>
                 <div key={fr}>
                     <p>{fr}</p>
-                    <button onClick={() => this.handleAcceptFriend(fr)}>Accept</button>
-                    <button onClick={() => this.handleDeclineFriend(fr)}>Decline</button>
+                    <button id="acceptBtn" onClick={() => this.handleAcceptFriend(fr)}>Accept</button>
+                    <button id="declineBtn" onClick={() => this.handleDeclineFriend(fr)}>Decline</button>
                 </div>
             )}
         </div>
