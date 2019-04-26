@@ -1,3 +1,5 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 import React from 'react';
 import { withRouter } from 'react-router-dom'
 
@@ -72,17 +74,6 @@ export class SignUp extends React.Component {
             });
         } catch (err) {
             this.setState({ errorMsg: "Failed to connect to server: " + err });
-            return;
-        }
-
-
-        if (response.status === 400) {
-            this.setState({ errorMsg: "Invalid userId/password" });
-            return;
-        }
-
-        if (response.status !== 201) {
-            this.setState({ errorMsg: "Error when connecting to server: status code " + response.status });
             return;
         }
 

@@ -1,3 +1,5 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 import React from "react";
 
 export class Timeline extends React.Component {
@@ -48,11 +50,6 @@ export class Timeline extends React.Component {
             return;
         }
 
-        if (response.status !== 201) {
-            alert("Error when connecting to server: status code " + response.status);
-            return;
-        }
-
         //reset text after sending a message
         this.setState({ text: "" });
     };
@@ -83,9 +80,6 @@ export class Timeline extends React.Component {
                     }
                 }
             );
-
-        } else {
-            alert("Error when connecting to server: status code " + response.status);
         }
     };
 

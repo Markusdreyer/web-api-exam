@@ -1,3 +1,5 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -20,9 +22,6 @@ Users.createUser("purgatory", "hellishell", "Dante", "Alighieri", "29061265", "I
 Users.createUser("colgate59", "secretpass", "Eugenio", "Barsanti", "27051821", "Italy", [], [])
 Users.createUser("practicallygod", "imalive", "Jesus", "Christ", "24120004", "Bethlehem", [], [])
 
-
-
-//to handle JSON payloads
 app.use(bodyParser.json());
 
 
@@ -32,8 +31,6 @@ app.use(session({
     saveUninitialized: false
 }));
 
-
-//needed to server static files, like HTML, CSS and JS.
 app.use(express.static('public'));
 
 let counter = 0;
@@ -46,9 +43,7 @@ app.get('/api/posts/:user', (req, res) => {
 
 app.post('/api/posts', (req, res) => {
     const dto = req.body;
-
     const id = counter++;
-
     const post = { id: id, author: dto.author, text: dto.text };
 
     Posts.updatePosts(post);
@@ -64,8 +59,6 @@ app.post('/api/posts', (req, res) => {
             const json = JSON.stringify(post);
             console.log("Broadcasting to client: " + JSON.stringify(post));
             client.send(json);
-        } else {
-            console.log("Client not ready");
         }
     });
 
@@ -113,10 +106,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//--- Routes -----------
 app.use('/api', authApi);
 
-//handling 404
 app.use((req, res, next) => {
     res.sendFile(path.resolve(__dirname, '..', '..', 'public', 'index.html'));
 });

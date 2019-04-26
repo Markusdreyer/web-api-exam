@@ -1,3 +1,5 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 const React = require('react');
 const { mount } = require('enzyme');
 const { MemoryRouter } = require('react-router-dom');

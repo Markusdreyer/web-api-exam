@@ -1,5 +1,8 @@
 # Student notes
 
+## How to run
+The program has been pre-populated with data for ease of use, and is also set up with some cases to get started.
+
 ## Checklist
 ### Requirements for E
 - [x] Write a home page with React.

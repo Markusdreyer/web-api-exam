@@ -1,6 +1,4 @@
-/*
-This file contains code from the lecturer. The code has been modified to some extent
-*/
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
 
 const users = new Map();
 

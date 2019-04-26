@@ -1,11 +1,9 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { async } from "rxjs/internal/scheduler/async";
 
-/*
-    Just provide a header component for all pages, where we have a link to the
-    home-page, and login/sing-up/logout buttons.
- */
 export class HeaderBar extends React.Component {
   constructor(props) {
     super(props);
@@ -35,11 +33,6 @@ export class HeaderBar extends React.Component {
       alert("Failed to connect to server: " + err);
       return;
     }
-
-    if (response.status !== 200) {
-      alert("Error when connecting to server: status code " + response.status);
-      return;
-    }
     const payload = await response.json();
     this.props.searchResult(payload)
   }
@@ -53,11 +46,6 @@ export class HeaderBar extends React.Component {
       response = await fetch(url, { method: "post" });
     } catch (err) {
       alert("Failed to connect to server: " + err);
-      return;
-    }
-
-    if (response.status !== 204) {
-      alert("Error when connecting to server: status code " + response.status);
       return;
     }
 

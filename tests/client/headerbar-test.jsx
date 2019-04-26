@@ -1,3 +1,5 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 const React = require('react');
 const { mount } = require('enzyme');
 const { MemoryRouter } = require('react-router-dom');
@@ -58,7 +60,6 @@ test("Test do logout", async () => {
     );
 
     const html = driver.html();
-    //expect(html.includes(userId)).toEqual(true);
 
     const logoutBtn = driver.find("#logoutBtnId").at(0);
     const searchBtn = driver.find("#searchBtn").at(0);

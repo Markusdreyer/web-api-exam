@@ -1,3 +1,6 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
+
 const express = require('express');
 const passport = require('passport');
 
@@ -47,19 +50,9 @@ router.post('/signup', function (req, res) {
 
     const created = Users.createUser(req.body.userId, req.body.password, req.body.firstName, req.body.surname, req.body.dateOfBirth, req.body.location);
 
-    if (!created) {
-        res.status(400).send();
-        return;
-    }
-
     passport.authenticate('local')(req, res, () => {
         req.session.save((err) => {
-            if (err) {
-                //shouldn't really happen
-                res.status(500).send();
-            } else {
-                res.status(201).send();
-            }
+            res.status(201).send();
         });
     });
 });

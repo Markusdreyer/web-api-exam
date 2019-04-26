@@ -1,3 +1,5 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 import React from "react";
 import { Link, withRouter } from 'react-router-dom'
 
@@ -30,13 +32,7 @@ export class SearchResult extends React.Component {
                 body: JSON.stringify(payload)
             });
         } catch (err) {
-            this.setState({ errorMsg: "Failed to connect to server: " + err });
-            return;
-        }
 
-        if (response.status !== 201) {
-            console.log("Fail")
-        } else {
 
         }
     }

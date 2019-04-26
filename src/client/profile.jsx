@@ -1,5 +1,6 @@
+//This file contains code from the lecturer and has been altered to fit the needs of this assignment
+
 import React from "react";
-import { isNullOrUndefined } from "util";
 
 export class Profile extends React.Component {
     constructor(props) {
